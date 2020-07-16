@@ -1,0 +1,6 @@
+.recipes__section{
+  background-color: pink;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
