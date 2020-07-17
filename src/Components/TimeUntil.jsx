@@ -9,14 +9,22 @@ const TimeUntil = ({ totalTime }) => {
     <>
       <h3>
         Finish Time At :
-        <span style={{ backgroundColor: 'lightgray' }}>{finishedTime}</span>
-        O&apos;Clock
+        <span style={{ backgroundColor: 'lightgray' }}>
+          {finishedTime}
+        </span>
+        {finishedTime === 'No time provided' ? '' : (
+          <span>
+            &nbsp;&nbsp;O&apos;Clock
+          </span>
+        )}
       </h3>
-      <h4>
-        (
-        {Math.round(totalTime / 60)}
-        hours)
-      </h4>
+      {finishedTime === 'No time provided' ? '' : (
+        <h4>
+          (
+          {Math.round(totalTime / 60)}
+        &nbsp;hours)
+        </h4>
+      )}
     </>
   );
 };
