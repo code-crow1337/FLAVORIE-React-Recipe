@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     margin: 0,
-    width: 300,
+    width: 310,
     color: theme.palette.text.secondary,
   },
   li: {
@@ -22,6 +22,15 @@ const useStyles = makeStyles((theme) => ({
   },
   image: {
     display: 'inline',
+  },
+  measurment: {
+    fontWeight: '600',
+    color: '#e4686a',
+  },
+  healthLabel: {
+    color: '#006C49',
+    fontWeight: '600',
+    fontSize: '1.5rem',
   },
 }));
 const SingleRecipe = (props) => {
@@ -45,29 +54,29 @@ const { healthLabels,
         justify="center"
         alignItems="center"
       >
-        <ul className={classes.ul}>
+        <ol className={classes.ul}>
           {ingredients.map((ingredient, index) => (
             <li key={`${image}#${index}`} className={classes.li}>
               (
               {ingredient.text}
-              <span>
+              <span className={classes.measurment}>
+                &nbsp;&nbsp;
                 (
-                {(ingredient.weight).toFixed(2)}
+                {Math.round(ingredient.weight)}
                 g
                 )
               </span>
             </li>
-          ),
-          )}
-        </ul>
+          ))}
+        </ol>
         <img src={image} alt={label} className={classes.image} />
       </Grid>
 
       <Box mt={5}>
         {healthLabels.map((healthlabel) => (
-          <span key={healthlabel}>
+          <span className={classes.healthLabel} key={healthlabel}>
             {healthlabel}
-            ß,
+            ,
           </span>
         ))}
       </Box>
