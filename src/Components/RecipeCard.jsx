@@ -6,7 +6,7 @@ import {
   Typography, CardActions, Button,
 } from '@material-ui/core/';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   card: {
     backgroundColor: '#ffffffBF',
     display: 'flex',
