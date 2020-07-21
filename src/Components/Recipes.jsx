@@ -12,14 +12,14 @@ const formatURI = ({ hits }) => {
 };
 const Recipies = () => {
   const history = useHistory();
-  const [recipes, setRecipes] = useState(null)
+  const [recipes, setRecipes] = useState(null);
   useEffect(() => {
     async function fetchRecipes() {
       const response = await fetch('/api/recipes');
       const data = await response.json();
       if (response.status !== 200) throw Error(data.message);
       let temp = JSON.parse(data.data);
-      setRecipes(temp.hits)
+      setRecipes(temp.hits);
       temp = formatURI(temp);
     }
     fetchRecipes();
