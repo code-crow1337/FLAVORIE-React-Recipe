@@ -62,6 +62,7 @@ const RecipeCard = ({ recipe, handleRecipe }) => {
                   color="textSecondary"
                 >
                   {label}
+                  &nbsp;
                 </Typography>
               ))}
 
