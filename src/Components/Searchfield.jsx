@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
-import SearchIcon from '@material-ui/icons/Search';
-import { fade, makeStyles } from '@material-ui/core/styles';
-import InputBase from '@material-ui/core/InputBase';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import TextField from '@material-ui/core/TextField';
+import React from 'react';
+// import { fade, makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
+/* const useStyles = makeStyles((theme) => ({
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -45,17 +41,17 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-}));
+})); */
 
 const Searchfield = () => {
-  const [category, setCategory] = useState('');
+  // const [category, setCategory] = useState('');
 
-  const classes = useStyles();
+  // const classes = useStyles();
 
-  const getSearchQuery = (e) => {
+  /*   const getSearchQuery = (e) => {
     setCategory(e.target.value);
-  };
-  const foodCategories = [
+  }; */
+  /*   const foodCategories = [
     { type: 'mealType', text: 'Breakfast' },
     { type: 'mealType', text: 'Lunch' },
     { type: 'mealType', text: 'Dinner' },
@@ -77,8 +73,8 @@ const Searchfield = () => {
     { type: 'dishType', text: 'Salad' },
     { type: 'dishType', text: 'Sandwiches' },
     { type: 'dishType', text: 'Soup' },
-    { type: 'dishType', text: 'Starter' }
-  ];
+    { type: 'dishType', text: 'Starter' },
+  ]; */
   return (
     <>
 

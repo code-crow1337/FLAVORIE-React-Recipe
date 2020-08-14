@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import RecipeCard from './RecipeCard';
 
 const formatURI = ({ hits }) => {
-  const formtedArr = hits.map((recipe) => {
+  return hits.map((recipe) => {
     const obj = { ...recipe };
     obj.recipe.uri = recipe.recipe.uri.replace(/^(.*?)#/, '');
     return obj;
