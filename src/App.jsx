@@ -2,21 +2,31 @@ import React from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
-  Route,
+  Route, Switch, 
 } from 'react-router-dom';
+import Container from '@material-ui/core/Container';
+import Theme from './Styles/Theme';
+import ScrollToTop from './Components/ScrollToTop';
 import Header from './Components/Header';
 import { AboutPage, RecipePage, SingleRecipePage } from './Pages';
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Header />
-        <Route exact path="/" component={RecipePage} />
-        <Route path="/about" component={AboutPage} />
-        <Route path="/recipe" component={SingleRecipePage} />
-      </div>
-    </Router>
+    <Theme>
+      <Router>
+        <ScrollToTop />
+        <div className="App">
+          <Header />
+          <Container maxWidth="lg">
+                <Switch>
+                  <Route exact path="/" component={RecipePage} />
+                  <Route path="/about" component={AboutPage} />
+                  <Route path="/recipe:uri" component={SingleRecipePage} />
+                </Switch>
+          </Container>
+        </div>
+      </Router>
+    </Theme>
   );
 }
 

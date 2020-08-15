@@ -3,9 +3,12 @@
 }
 a {
   text-decoration: none;
-}
-a:hover, a:visited{
   color:white;
+  background-color:#e4686a ;
+}
+a:hover{
+  color:white;
+  background-color:#753031 ;
 }
 
 

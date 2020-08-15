@@ -1,43 +1,48 @@
 import React from 'react';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  clock: {
+    backgroundColor: '#f2f1f1',
+  },
+}));
 
 const TimeUntil = ({ totalTime }) => {
+  const classes = useStyles();
   let finishedTime = '';
   finishedTime = transformTime(totalTime);
   if (checkTime(totalTime)) finishedTime = 'No time provided';
 
   return (
-    <>
-      <h3>
-        Finish Time At :
-        <span style={{ backgroundColor: 'lightgray' }}>
-          {finishedTime}
-        </span>
+    <Box className={classes.clock} m={1} p={1}>
+      <Typography variant="h5">
+        Finish Time :  &nbsp;
+        { finishedTime }
         {finishedTime === 'No time provided' ? '' : (
           <span>
             &nbsp;&nbsp;O&apos;Clock
           </span>
         )}
-      </h3>
+      </Typography>
       {finishedTime === 'No time provided' ? '' : (
-        <h4>
-          (
-          {Math.round(totalTime / 60)}
-        &nbsp;hours)
-        </h4>
+        <Typography variant="h5">
+          {totalTime < 60 ? `${totalTime} Minutes` : `${Math.round(totalTime / 60)} hours` }
+        </Typography>
       )}
-    </>
+    </Box>
   );
 };
 const transformTime = (totalTime) => {
   const unixtTimeStamp = Date.now();
   const totalTimeInMilliSec = (totalTime * 60);
-  const date = new Date(unixtTimeStamp + totalTimeInMilliSec * 1000);
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  return `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? minutes + '0' : minutes}`
-}
-
-const checkTime = (time) => {
-  return time === 0;
+  const timeUntilFinished = new Date(unixtTimeStamp + totalTimeInMilliSec * 1000);
+  const finishedHour = timeUntilFinished.getHours();
+  const finishedMin = timeUntilFinished.getMinutes();
+  return `${finishedHour < 10 ? `0${finishedHour}` : finishedHour}:${finishedMin < 10 ? finishedMin + '0' : finishedMin}`;
 };
+
+const checkTime = (time) => time === 0;
+
 export default TimeUntil;

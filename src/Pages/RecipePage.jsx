@@ -28,7 +28,7 @@ const RecipePage = () => {
   const getSpecifiedRecipe = async (uri) => {
     const { recipe: specifiedRecipe } = recipes.find(({ recipe }) => recipe.uri === uri);
     history.push({
-      pathname: '/recipe',
+      pathname: `/${specifiedRecipe.uri}`,
       state: { recipe: specifiedRecipe },
     });
   };
@@ -37,13 +37,14 @@ const RecipePage = () => {
     <>
       <Box mt={8}>
         <section className="recipes__section">
-          <Grid container spacing={2}>
+          <Grid container spacing={1}>
             <Grid container direction="row" justify="center" spacing={3}>
               {recipes !== [] ? recipes.map((obj) => (
                 <RecipeCard
                   key={obj.recipe.uri}
                   recipe={obj.recipe}
-                  handleRecipe={getSpecifiedRecipe} />
+                  handleRecipe={getSpecifiedRecipe}
+                />
               )) : ''}
             </Grid>
           </Grid>

@@ -13,6 +13,9 @@ const url = 'https://api.edamam.com/search';
 const urlSingleRecpie = 'http://www.edamam.com/ontologies/edamam.owl#';
 
 // TODO when app is finished. I need to change it to making api calls, aka 5 calls/min
+// TODO to get a specific recipe from the api the query is r=uri but encoded 
+// like this https://api.edamam.com/search?r=http%3A%2F%2Fwww.edamam.com%2Fontologies%2Fedamam.owl%23recipe_b79327d05b8e5b838ad6cfd9576b30b6&app_id={{{}}}app_key={{{}}}
+
 // const recipieApi = `${url}?q=desserts&app_id=${appID}&app_key=${appKey}`
 
 app.use(bodyParser.json());

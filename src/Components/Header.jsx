@@ -31,6 +31,14 @@ const useStyles = makeStyles((theme) => ({
   toolBar: {
     backgroundColor: '#e4686aD4',
   },
+  menuItem:{
+    '&:hover': {
+      backgroundColor: '#753031',
+    },
+  },
+  menuText: {
+    fontSize: '1.5rem',
+  },
   title: {
     flexGrow: 1,
     display: 'none',
@@ -64,8 +72,8 @@ export default function Header() {
       <List className={classes.openMenu}>
         {navLinks.map(({ menu, path }) => (
           <Link to={path} key={menu}>
-            <ListItem button>
-              <ListItemText primary={menu} />
+            <ListItem className={classes.menuItem} button>
+              <ListItemText className={classes.menuText} primary={menu} disableTypography />
             </ListItem>
           </Link>
         ))}
@@ -77,14 +85,14 @@ export default function Header() {
     <div className={classes.root}>
       <AppBar className={classes.menuBar} position="static">
         <Toolbar className={classes.toolBar}>
-          <Button onClick={toggleDrawer(true)}><MenuIcon style={{ color: 'white' }}/></Button>
+          <Button onClick={toggleDrawer(true)}><MenuIcon style={{ color: 'white' }} /></Button>
           <Drawer anchor="left" open={drawerState} onClose={toggleDrawer(false)}>
             {menuItems()}
           </Drawer>
           <Typography className={classes.title} variant="h3" noWrap>
             <Link to="/">FLAVORIE</Link>
           </Typography>
-         <Searchfield />
+          <Searchfield />
         </Toolbar>
       </AppBar>
     </div>
