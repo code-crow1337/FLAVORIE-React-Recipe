@@ -72,7 +72,7 @@ export default function Header() {
       <List className={classes.openMenu}>
         {navLinks.map(({ menu, path }) => (
           <Link to={path} key={menu}>
-            <ListItem className={classes.menuItem} button>
+            <ListItem className={classes.menuItem} button onClick={toggleDrawer(false)}>
               <ListItemText className={classes.menuText} primary={menu} disableTypography />
             </ListItem>
           </Link>

@@ -17,7 +17,7 @@ function App() {
         <ScrollToTop />
         <div className="App">
           <Header />
-          <Container maxWidth="lg">
+          <Container maxWidth="xl">
                 <Switch>
                   <Route exact path="/" component={RecipePage} />
                   <Route path="/about" component={AboutPage} />

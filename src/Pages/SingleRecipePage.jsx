@@ -4,6 +4,7 @@ import { Box, Grid } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TimeUntil from '../Components/TimeUntil';
+import Serving from '../Components/Serving';
 import LoadingComponent from '../Components/LoadingComponent';
 
 const useStyles = makeStyles((theme) => ({
@@ -54,19 +55,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 const SingleRecipePage = (props) => {
   const [specificRecipe, setSpecificRecipe] = useState('no recipe');
+  const [ingredientsWeight, setIngredientsWeight] = useState(undefined);
   const classes = useStyles();
   const history = useHistory();
   const { uri } = useParams();
 
   useEffect(() => {
+    console.log('setting specified recipe only on load');
     if (!props.location.state) {
       (async () => {
-        console.log('fetching');
         const response = await fetch(`/api/recipes/recipe${uri}`);
         const data = await response.json();
         if (response.status !== 200) throw Error(data.message);
         const { data: { recipe } } = data;
-        console.log('ello', await recipe);
         setSpecificRecipe(recipe);
       })();
     } else {
@@ -74,6 +75,38 @@ const SingleRecipePage = (props) => {
       setSpecificRecipe(recipe);
     }
   }, []);
+  const removeMeasurements = (ingredients) => {
+    const measurements = ['cup', 'cups', 'teaspoon',
+      'teaspoons', 'tablespoon', 'tablespoons',
+      'ounces', 'ounce'];
+      const modifiedIngredients = [];
+     ingredients.map((ingredient) => {
+       console.log('ingried',ingredient);
+      const temp = { ...ingredient };
+      temp.text = temp.text.replace(/\d\W*[/]*\d*/g, '').trim();
+      console.log(temp.text);
+      return temp;
+    }).forEach((ingredient) => measurements.forEach((measurment) => {
+      const temp = { ...ingredient };
+      const { text } = temp;
+      if (!text.includes(measurment)) return '';
+      console.log('measurment', measurment);
+      temp.text = temp.text.replace(measurment, '').trim();
+      console.log('modified', temp);
+      modifiedIngredients.push(temp);
+    }));
+    return modifiedIngredients;
+  };
+
+  useEffect(() => {
+    console.log('specified revipe triggered');
+    if (specificRecipe !== 'no recipe') {
+      const { ingredients } = specificRecipe;
+      const modifiedString = removeMeasurements(ingredients);
+      console.log(modifiedString);
+      setIngredientsWeight(modifiedString);
+    }
+  }, [specificRecipe]);
 
   const {
     healthLabels,
@@ -83,6 +116,7 @@ const SingleRecipePage = (props) => {
     source,
     url,
     totalTime,
+    yield: servings,
   } = specificRecipe;
   return (
     <section className={classes.root}>
@@ -101,7 +135,6 @@ const SingleRecipePage = (props) => {
                 <Grid item xs={12} lg={6}>
                   <img src={image} alt={label} className={classes.image} />
                 </Grid>
-
                 <Grid item xs={12} lg={6}>
                   <Box m={3}>
                     {healthLabels.map((healthlabel) => (
@@ -112,9 +145,10 @@ const SingleRecipePage = (props) => {
                       </span>
                     ))}
                     <TimeUntil totalTime={totalTime} />
+                    <Serving servings={servings} ingredients={ingredients} renderIngredients={(newWeight) => setIngredientsWeight(newWeight)} />
                     <ol className={classes.ol}>
                       {
-                        ingredients.map((ingredient, index) => (
+                        !ingredientsWeight ? '' : ingredientsWeight.map((ingredient, index) => (
                           <li key={`${image}#${index}`} className={classes.li}>
                             {ingredient.text}
                             <span className={classes.measurment}>
